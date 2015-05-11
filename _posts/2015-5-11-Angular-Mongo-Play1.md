@@ -129,7 +129,7 @@ To do that we have also to create a globally accessed utility class:
 	    static public Datastore datastore;
     }
 
-And Global.java which will connect to mongoDB on start up.
+And **Global.java** which will connect to mongoDB on start up.
 
     import java.net.UnknownHostException;
 
