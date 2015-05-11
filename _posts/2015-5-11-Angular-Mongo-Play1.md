@@ -3,7 +3,7 @@ layout: post
 title: Simple web app with AngularJS + Play + MongoDB part1
 ---
 
-I've always hated javascript, so when I came across AngularJS I thought it would be just another javascript library but it actually turned out to be more interesting than that, so I decided that I should write my experience with AngularJS, and to make things a little more interesting I decided to try out Play framework as well.
+I've always hated javascript, so when I came across AngularJS I thought it would be just another javascript library, but it actually turned out to be more interesting than that, so I decided that I should write my experience with AngularJS, and to make things a little more interesting I decided to try out Play framework as well.
 
 So what exactly are we going to do here?
 
@@ -11,7 +11,7 @@ We are going to develop a simple web application using AngularJS, Play Framework
 
 This will be made in 2 parts:
 
-**Part 1** Create a Play java application using activator templates and integrate it with AngularJS and MongoDB+Morphia
+**Part 1** Create a Play java application using activator templates and integrate it with AngularJS and MongoDB using Morphia
 
 **Part 2** Develop the application itself.
 
@@ -94,6 +94,7 @@ This command will start mongo server with the configuration we added in the abov
 Now let’s add Morphia dependency to the play app we created earlier, to do that just navigate to the root folder of the play app and open _build.sbt_ file and add this line:
 
     "org.mongodb.morphia" % "morphia" % "0.107"
+
  So now your build.sbt file should look something like that:
  
     name := """VanillaJava"""
@@ -109,6 +110,57 @@ Now let’s add Morphia dependency to the play app we created earlier, to do tha
       )
 
 Now that’s all the configuration you need to start a Play-AngularJS-MongoDB web application.
+
+To connect to MongoDB from play we have to create global settings class which will run on application start up.
+To do that we have also to create a globally accessed utility class:
+
+**MorphiaObject.java**
+
+    package controllers;
+
+    import org.mongodb.morphia.Datastore;
+    import org.mongodb.morphia.Morphia;
+
+    import com.mongodb.Mongo;
+
+    public class MorphiaObject {
+	    static public Mongo mongo;
+	    static public Morphia morphia;
+	    static public Datastore datastore;
+    }
+
+And Global.java which will connect to mongoDB on start up.
+
+    import java.net.UnknownHostException;
+
+    import org.mongodb.morphia.Morphia;
+
+    import play.GlobalSettings;
+    import play.Logger;
+
+    import com.mongodb.Mongo;
+
+    import controllers.MorphiaObject;
+
+
+    public class Global extends GlobalSettings {
+    	@Override
+    	public void onStart(play.Application arg0) {
+		    super.beforeStart(arg0);
+		    Logger.debug("** onStart **"); 
+		    try {
+			    MorphiaObject.mongo = new Mongo("127.0.0.1", 27017);
+		    } catch (UnknownHostException e) {
+		    	e.printStackTrace();
+		    }
+	    	MorphiaObject.morphia = new Morphia();
+	    	MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "test");
+		    MorphiaObject.datastore.ensureIndexes();   
+		    MorphiaObject.datastore.ensureCaps();  
+
+		    Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
+	    }
+    }
 
 If you start your Play server now using the _run_ command you should get something like that on the command line:
 
