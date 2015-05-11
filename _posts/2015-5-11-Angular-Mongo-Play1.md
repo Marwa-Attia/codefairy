@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Simple web app with AngularJS + Play + MongoDB part1
 ---
 
 I've always hated javascript, so when I came across AngularJS I thought it would be just another javascript library but it actually turned out to be more interesting than that, so I decided that I should write my experience with AngularJS, and to make things a little more interesting I decided to try out Play framework as well.
@@ -119,4 +120,3 @@ If you opened  [localhost:9000](localhost:9000) on your browser you should see t
 
 That's all you'll need to run an application with AngularJS, Play, MongoDB stack.
 In the next post we will start developing a simple example to see how all this work togther.
-
