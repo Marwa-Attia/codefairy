@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hi everybody, I'm Marwa, I work as A Principal Software Developer at [Integrant](http://www.integrant.com/) in Cairo, Egypt. I like programming; obviously :), and I like learning about the latest technologies and using them in a professional way to build products that solves real human problems.  
 
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[marwa.atya@gmail.com](mailto:marwa.atya@gmail.com)
