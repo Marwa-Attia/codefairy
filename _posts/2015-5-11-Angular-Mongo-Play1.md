@@ -64,10 +64,9 @@ Now in Eclipse right-click on the project and select Debug As, Debug Configurati
   
 #Set up your application to use AngularJS
   
-  Setting up your application to use Angular is as simple as downloading the javascript file from [here](https://angularjs.org/), and including a link to the file in your _main.scala.html_ page as follows:
+  Setting up your application to use Angular is as simple as downloading the javascript file from [here](https://angularjs.org/), and including a link to the file in your **_main.scala.html_** page as follows:
   
     <script src="@routes.Assets.at("javascripts/angular.js")" type="text/javascript"></script>	
-    
   
 #Set up your application to Use MongoDB + Morphia
 ###Download and run MongoDB server
