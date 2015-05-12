@@ -114,18 +114,18 @@ To do that we have also to create a globally accessed utility class:
 
 **MorphiaObject.java**
 
-    package controllers;
+    <span style='color:#800000; font-weight:bold; '>package</span><span style='color:#004a43; '> controllers</span><span style='color:#800080; '>;</span>
 
-    import org.mongodb.morphia.Datastore;
-    import org.mongodb.morphia.Morphia;
+	<span style='color:#800000; font-weight:bold; '>import</span><span style='color:#004a43; '> org</span><span 	style='color:#808030; '>.</span><span style='color:#004a43; '>mongodb</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>morphia</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>Datastore</span><span style='color:#800080; '>;</span>
+	<span style='color:#800000; font-weight:bold; '>import</span><span style='color:#004a43; '> org</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>mongodb</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>morphia</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>Morphia</span><span style='color:#800080; '>;</span>
 
-    import com.mongodb.Mongo;
+	<span style='color:#800000; font-weight:bold; '>import</span><span style='color:#004a43; '> com</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>mongodb</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>Mongo</span><span style='color:#800080; '>;</span>
 
-    public class MorphiaObject {
-	    static public Mongo mongo;
-	    static public Morphia morphia;
-	    static public Datastore datastore;
-    }
+	<span style='color:#800000; font-weight:bold; '>public</span> <span style='color:#800000; font-weight:bold; '>class</span> MorphiaObject <span style='color:#800080; '>{</span>
+	<span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>public</span> Mongo mongo<span style='color:#800080; '>;</span>
+	<span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>public</span> Morphia morphia<span style='color:#800080; '>;</span>
+	<span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>public</span> Datastore datastore<span style='color:#800080; '>;</span>
+	<span style='color:#800080; '>}</span>
 
 And **Global.java** which will connect to mongoDB on start up.
 
