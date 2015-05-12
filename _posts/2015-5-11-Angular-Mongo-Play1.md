@@ -113,52 +113,53 @@ To connect to MongoDB from play we have to create global settings class which wi
 To do that we have also to create a globally accessed utility class:
 
 **MorphiaObject.java**
+		
+		```java
+		package controllers;
+		import org.mongodb.morphia.Datastore;
+		import org.mongodb.morphia.Morphia;
 
-    <span style='color:#800000; font-weight:bold; '>package</span><span style='color:#004a43; '> controllers</span><span style='color:#800080; '>;</span>
+		import com.mongodb.Mongo;
 
-	<span style='color:#800000; font-weight:bold; '>import</span><span style='color:#004a43; '> org</span><span 	style='color:#808030; '>.</span><span style='color:#004a43; '>mongodb</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>morphia</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>Datastore</span><span style='color:#800080; '>;</span>
-	<span style='color:#800000; font-weight:bold; '>import</span><span style='color:#004a43; '> org</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>mongodb</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>morphia</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>Morphia</span><span style='color:#800080; '>;</span>
-
-	<span style='color:#800000; font-weight:bold; '>import</span><span style='color:#004a43; '> com</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>mongodb</span><span style='color:#808030; '>.</span><span style='color:#004a43; '>Mongo</span><span style='color:#800080; '>;</span>
-
-	<span style='color:#800000; font-weight:bold; '>public</span> <span style='color:#800000; font-weight:bold; '>class</span> MorphiaObject <span style='color:#800080; '>{</span>
-	<span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>public</span> Mongo mongo<span style='color:#800080; '>;</span>
-	<span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>public</span> Morphia morphia<span style='color:#800080; '>;</span>
-	<span style='color:#800000; font-weight:bold; '>static</span> <span style='color:#800000; font-weight:bold; '>public</span> Datastore datastore<span style='color:#800080; '>;</span>
-	<span style='color:#800080; '>}</span>
+		public class MorphiaObject {
+			static public Mongo mongo;
+			static public Morphia morphia;
+			static public Datastore datastore;
+		}
 
 And **Global.java** which will connect to mongoDB on start up.
+	
+		```java
+    	import java.net.UnknownHostException;
 
-    import java.net.UnknownHostException;
+    	import org.mongodb.morphia.Morphia;
 
-    import org.mongodb.morphia.Morphia;
+    	import play.GlobalSettings;
+    	import play.Logger;
 
-    import play.GlobalSettings;
-    import play.Logger;
+    	import com.mongodb.Mongo;
 
-    import com.mongodb.Mongo;
-
-    import controllers.MorphiaObject;
+    	import controllers.MorphiaObject;
 
 
-    public class Global extends GlobalSettings {
-    	@Override
-    	public void onStart(play.Application arg0) {
-		    super.beforeStart(arg0);
-		    Logger.debug("** onStart **"); 
-		    try {
-			    MorphiaObject.mongo = new Mongo("127.0.0.1", 27017);
-		    } catch (UnknownHostException e) {
-		    	e.printStackTrace();
-		    }
-	    	MorphiaObject.morphia = new Morphia();
-	    	MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "test");
-		    MorphiaObject.datastore.ensureIndexes();   
-		    MorphiaObject.datastore.ensureCaps();  
+    	public class Global extends GlobalSettings {
+    		@Override
+    		public void onStart(play.Application arg0) {
+			   super.beforeStart(arg0);
+			 Logger.debug("** onStart **"); 
+			 try {
+				    MorphiaObject.mongo = new Mongo("127.0.0.1", 27017);
+			  } catch (UnknownHostException e) {
+			  	e.printStackTrace();
+			  }
+	    		MorphiaObject.morphia = new Morphia();
+	    		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "test");
+			 MorphiaObject.datastore.ensureIndexes();   
+			 MorphiaObject.datastore.ensureCaps();  
 
-		    Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
-	    }
-    }
+			 Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
+		 }
+	 }
 
 If you start your Play server now using the _run_ command you should get something like that on the command line:
 
