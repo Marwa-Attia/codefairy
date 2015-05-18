@@ -9,6 +9,7 @@ In part2 we will continue in developing our simple application.
 
 First, we need to create the model.The model is so simple, a Customer class, Address class and an Account class.
 We will start be the **BaseEntity.java** which is the parent class for all these entities:
+
 ```java
 package models.entity;
 
@@ -71,6 +72,7 @@ public abstract class BaseEntity {
 
  **Customer.Java** class
  
+ 
  ```java
  
  package models.entity;
@@ -119,6 +121,7 @@ public class Customer extends BaseEntity {
 The _Customer_ entity has two embedded one-to-one relationship with Account and Address documents.
 
 **Account.java**
+
 
 ```java
 
